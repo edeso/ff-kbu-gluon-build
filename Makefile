@@ -1,11 +1,16 @@
 # GLUON-RELEASE to use
 ifndef GLUON_RELEASE
-	GLUON_RELEASE:=v2020.2
+	GLUON_RELEASE:=v2020.2.x
 endif
+
+ifndef GLUON_BRANCH
+	GLUON_BRANCH:=$(GLUON_RELEASE)
+endif
+
 
 #What targets to use?
 ifndef TARGETS
-	TARGETS:=ipq40xx ar71xx-tiny ar71xx-generic ar71xx-nand x86-generic x86-geode x86-64 brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7621 sunxi-cortexa7
+	TARGETS:=ipq40xx-generic ipq806x-generic ath79-generic lantiq-xrx200 lantiq-xrx200 mpc85xx-generic mpc85xx-p1020 ar71xx-tiny ar71xx-generic ar71xx-nand x86-generic x86-geode x86-64 brcm2708-bcm2708 brcm2708-bcm2709 sunxi-cortexa7 ramips-mt7621 ramips-mt76x8 ramips-rt305x
 endif
 
 
@@ -35,18 +40,14 @@ init: gluon/Makefile
 dist/%: init
 	cp -a site/* $(PWD)/gluon/site/
 	make -C gluon GLUON_DEPRECATED=1 update
-
-	echo "Building Target: $*" >> $(PWD)/dist/out.txt
-	echo "Building Target: $*" >> $(PWD)/dist/err.txt
-
 	mkdir -p $(PWD)/dist/
-	make -j2 -C gluon all BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1 V=99 2>> $(PWD)/dist/err.txt >> $(PWD)/dist/out.txt
+	make -C gluon all -j 4 BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1  2>&1 | tee $(PWD)/dist/out_$*.txt
 	rsync -Hav $(PWD)/gluon/output/images/ $(PWD)/dist/
 
 	make -C gluon clean BROKEN=1 GLUON_DEPRECATED=1  GLUON_TARGET=$*
 
 gluon/Makefile:
-	git clone https://github.com/freifunk-gluon/gluon.git -b $(GLUON_RELEASE)
+	git clone https://github.com/freifunk-gluon/gluon.git -b $(GLUON_BRANCH)
 	mkdir -p $(PWD)/gluon/site/i18n
 
 clean:

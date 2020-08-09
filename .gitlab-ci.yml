@@ -1,21 +1,77 @@
-image: debian:stable
+# Based on https://git-lab.de/builder/build/-/blob/master/.gitlab-ci.yml
+# Caches Downloads,
+image: git.freifunk-koeln.de:5050/ff-koeln/gluon-docker-build/gluon-build
+
+variables:
+  GLUON_RELEASE: "v2020.2.x-weekly"
+  GLUON_BRANCH: "v2020.2.x"
 
 
-build:
+
+stages:
+  - init
+  - build
+
+.build_firmware: &build_firmware
   stage: build
+  cache:
+    key: gluon-downloads
+    paths:
+      - downloads/
+  artifacts:
+    paths:
+      - dist/out*.txt.xz
+    expire_in: 1 week
   before_script:
-  - export LANG=C.UTF-8
-  - apt-get update
-  - apt-get install -y build-essential xzip wget git ca-certificates gawk file libpng-dev curl sudo unzip libncurses5-dev python subversion rsync libssl-dev ccache xz-utils gettext-base
-  - mkdir -p ccache
-  - export CCACHE_BASEDIR=${PWD}
-  - export CCACHE_DIR=${PWD}/ccache
   - mkdir -p downloads/
   script:
-  - make FORCE_UNSAFE_CONFIGURE=1 CC='ccache gcc' DL_DIR=${PWD}/downloads
+  - make FORCE_UNSAFE_CONFIGURE=1 DL_DIR=${PWD}/downloads
   - eval $(ssh-agent -s)
-  - ssh-add <(echo "$SSH_PRIVATE_KEY_RELEASE" | base64 -d)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY_RELEASE_FFKOELN" | base64 -d)
   - xz dist/*.txt
-  - rsync -e "ssh -4 -o StrictHostKeyChecking=no -p 2310" --delete -Ha dist/ gluon-release@www1.kbu.freifunk.net:/space/files/gluon-weekly/v2020
-  only:
-  - master
+  - rsync -e "ssh -o StrictHostKeyChecking=no" -Ha dist/ gitlabci@files-v6.freifunk-koeln.de:/var/www/html/$GLUON_RELEASE
+
+clean:
+  stage: init
+  script:
+  -  mkdir dist/
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY_RELEASE_FFKOELN" | base64 -d)
+  - rsync -e "ssh -o StrictHostKeyChecking=no" --delete -Ha dist/ gitlabci@files-v6.freifunk-koeln.de:/var/www/html/$GLUON_RELEASE
+
+
+ipq-build:
+  <<: *build_firmware
+  stage: build
+  variables:
+    TARGETS: "ipq40xx-generic ipq806x-generic"
+
+mpc-build:
+  <<: *build_firmware
+  stage: build
+  variables:
+    TARGETS: "mpc85xx-generic mpc85xx-p1020"
+
+ar71xx-ath79-build:
+  <<: *build_firmware
+  stage: build
+  variables:
+    TARGETS: "ar71xx-tiny ar71xx-generic ar71xx-nand ath79-generic"
+
+x86-build:
+  <<: *build_firmware
+  stage: build
+  variables:
+    TARGETS: "x86-generic x86-geode x86-64"
+
+brcm-build:
+  <<: *build_firmware
+  stage: build
+  variables:
+    TARGETS: "brcm2708-bcm2708 brcm2708-bcm2709"
+
+ramips-build:
+  <<: *build_firmware
+  stage: build
+  variables:
+    TARGETS: "ramips-mt7621 ramips-mt7621 ramips-mt76x8 ramips-rt305x"
