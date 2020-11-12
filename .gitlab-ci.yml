@@ -1,5 +1,7 @@
 image: debian:stable
 
+stages:
+  - build
 
 build:
   stage: build
