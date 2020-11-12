@@ -16,7 +16,7 @@ build:
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY_RELEASE_FFKOELN" | base64 -d)
   - xz dist/*.txt
-  - rsync -e "ssh -4 -o StrictHostKeyChecking=no" --delete -Ha dist/ gitlabci@files-v6.freifunk-koeln.de:/var/www/html/2019.1.x-11s-weekly/
+  - rsync -e "ssh -o StrictHostKeyChecking=no" --delete -Ha dist/ gitlabci@files-v6.freifunk-koeln.de:/var/www/html/2019.1.x-11s-weekly/
 
   only:
   - master-11s
