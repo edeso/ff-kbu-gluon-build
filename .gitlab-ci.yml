@@ -1,5 +1,7 @@
 image: debian:stable
 
+stages:
+  - build
 
 build:
   stage: build
@@ -19,4 +21,4 @@ build:
   - rsync -e "ssh -o StrictHostKeyChecking=no" --delete -Ha dist/ gitlabci@files-v6.freifunk-koeln.de:/var/www/html/2019.1.x-11s-weekly/
 
   only:
-  - master-11s
+  - 2019.1-11s
