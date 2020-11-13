@@ -40,7 +40,7 @@ dist/%: init
 	echo "Building Target: $*" >> $(PWD)/dist/err.txt
 
 	mkdir -p $(PWD)/dist/
-	make -j 2 -C gluon all BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1  2>&1 | tee -a $(PWD)/dist/out_$*.txt
+	make --output-sync=recurse -j 4 -C gluon all BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1  2>&1 | tee -a $(PWD)/dist/out_$*.txt
 	rsync -Hav $(PWD)/gluon/output/images/ $(PWD)/dist/
 
 	make -C gluon clean BROKEN=1 GLUON_DEPRECATED=1  GLUON_TARGET=$*
