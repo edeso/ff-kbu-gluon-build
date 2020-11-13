@@ -5,7 +5,7 @@ endif
 
 #What targets to use?
 ifndef TARGETS
-	TARGETS:=ipq40xx-generic ipq806x-generic ar71xx-tiny ar71xx-generic ar71xx-nand x86-generic x86-geode x86-64 brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7621 sunxi-cortexa7
+	TARGETS:=ipq40xx ar71xx-tiny ar71xx-generic ar71xx-nand x86-generic x86-geode x86-64 brcm2708-bcm2708 brcm2708-bcm2709 mpc85xx-generic ramips-mt7621 sunxi-cortexa7
 endif
 
 
@@ -40,7 +40,7 @@ dist/%: init
 	echo "Building Target: $*" >> $(PWD)/dist/err.txt
 
 	mkdir -p $(PWD)/dist/
-	make -C gluon all BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1  2>&1 | tee -a $(PWD)/dist/out_$*.txt
+	make -j 2 -C gluon all BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1  2>&1 | tee -a $(PWD)/dist/out_$*.txt
 	rsync -Hav $(PWD)/gluon/output/images/ $(PWD)/dist/
 
 	make -C gluon clean BROKEN=1 GLUON_DEPRECATED=1  GLUON_TARGET=$*
