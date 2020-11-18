@@ -1,6 +1,6 @@
 # GLUON-RELEASE to use
 ifndef GLUON_RELEASE
-	GLUON_RELEASE:=v2019.1.x
+	GLUON_RELEASE:=v2019.1.3
 endif
 
 #What targets to use?
@@ -40,7 +40,7 @@ dist/%: init
 	echo "Building Target: $*" >> $(PWD)/dist/err.txt
 
 	mkdir -p $(PWD)/dist/
-	make -j2 -C gluon all BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1 V=99 2>> $(PWD)/dist/err.txt >> $(PWD)/dist/out.txt
+	make -j2 -C gluon all BROKEN=1 GLUON_TARGET=$* GLUON_DEPRECATED=1 GLUON_RELEASE=$(GLUON_RELEASE) V=99 2>> $(PWD)/dist/err.txt >> $(PWD)/dist/out.txt
 	rsync -Hav $(PWD)/gluon/output/images/ $(PWD)/dist/
 
 	make -C gluon clean BROKEN=1 GLUON_DEPRECATED=1  GLUON_TARGET=$*
