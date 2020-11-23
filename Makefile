@@ -1,7 +1,12 @@
 # GLUON-RELEASE to use
 ifndef GLUON_RELEASE
-	GLUON_RELEASE:=v2019.1.x
+	GLUON_RELEASE:=v2020.2.x
 endif
+
+ifndef GLUON_BRANCH
+	GLUON_BRANCH:=$(GLUON_RELEASE)
+endif
+
 
 #What targets to use?
 ifndef TARGETS
@@ -46,7 +51,7 @@ dist/%: init
 	make -C gluon clean BROKEN=1 GLUON_DEPRECATED=1  GLUON_TARGET=$*
 
 gluon/Makefile:
-	git clone https://github.com/freifunk-gluon/gluon.git -b $(GLUON_RELEASE)
+	git clone https://github.com/freifunk-gluon/gluon.git -b $(GLUON_BRANCH)
 	mkdir -p $(PWD)/gluon/site/i18n
 
 clean:

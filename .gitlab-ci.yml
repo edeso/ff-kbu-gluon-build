@@ -1,4 +1,8 @@
-image: debian:stable
+image: git.freifunk-koeln.de:5050/ff-koeln/gluon-docker-build/gluon-build
+
+variables:
+  GLUON_RELEASE: "v2019.1.x-ibss-weekly"
+  GLUON_BRANCH: "v2019.1.x"
 
 stages:
   - build
@@ -6,16 +10,10 @@ stages:
 build:
   stage: build
   before_script:
-  - export LANG=C.UTF-8
-  - apt-get update
-  - apt-get install -y build-essential xzip wget git ca-certificates gawk file libpng-dev curl sudo unzip libncurses5-dev python subversion rsync libssl-dev ccache xz-utils gettext-base
-  - mkdir -p ccache
-  - export CCACHE_BASEDIR=${PWD}
-  - export CCACHE_DIR=${PWD}/ccache
   - mkdir -p downloads/
   script:
   - make FORCE_UNSAFE_CONFIGURE=1 CC='ccache gcc' DL_DIR=${PWD}/downloads
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY_RELEASE_FFKOELN" | base64 -d)
   - xz dist/*.txt
-  - rsync -e "ssh -o StrictHostKeyChecking=no" --delete -Ha dist/ gitlabci@files-v6.freifunk-koeln.de:/var/www/html/${GLUON_RELEASE}-11s
+  - rsync -e "ssh -o StrictHostKeyChecking=no" --delete -Ha dist/ gitlabci@files-v6.freifunk-koeln.de:/var/www/html/${GLUON_RELEASE}
