@@ -1,6 +1,6 @@
 image: debian:stable
 variables:
-  GLUON_RELEASE: "v2019.1.x-ibss-weekly"
+  GLUON_RELEASE: "v2019.1.x-11s-weekly"
   GLUON_BRANCH: "v2019.1.x"
 
 stages:
