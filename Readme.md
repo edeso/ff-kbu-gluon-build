@@ -12,12 +12,12 @@ Der Build kann auch per Hand gestartert werden
 * `make world` erstellt binaries für alle Hoods
 * `make deploy` fügt die erstellte Firmware in einer Deploy-Struktur zusammen.
 
-Branches:
+## Branches:
 
 * Der Branch `master` baut zur Zeit Gluon v2020.2.x, weekly (bei Updates und wöchtenlich)
 * Die Branches `release-2019.1-ibss` und `release-2019.1-11s` bauen Gluon v2019.1.x, d.h. die letzte Version, die prinzipiell noch mit ibss arbeiten kann.
 
-Hinweis:
+## Hinweise:
 
 * Die Knoten erscheinen z.T. nicht auf der Karte map.kbu.freifunk.net. Ein möglicher Hintergrund ist eine Umstellung in respondd (link local multicast -> site local multicast); die Firmware könnte zu neue sein. (Vgl. https://github.com/freifunk-gluon/gluon/issues/984)
-* Die Ablage https://kbu.freifunk.net/files/ wird nicht mehr befüllt, da yanosz die Zugriffsrechte dafür entzogen worden sind. Die Dateien dort sind daher veraltet und können weder aktualisiert noch befüllt werden.
+* Die Ablage https://kbu.freifunk.net/files/ wird nicht mehr befüllt, da yanosz die Zugriffsrechte dafür entzogen worden sind. Die Dateien dort sind daher veraltet und können weder aktualisiert noch gelöscht werden.
