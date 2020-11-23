@@ -3,7 +3,7 @@
 image: git.freifunk-koeln.de:5050/ff-koeln/gluon-docker-build/gluon-build
 
 variables:
-  GLUON_RELEASE: "v2020.2.x-weekly"
+  GLUON_RELEASE: "v2020.2.x-ci-auto"
   GLUON_BRANCH: "v2020.2.x"
 
 
