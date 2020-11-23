@@ -8,6 +8,13 @@ stages:
 
 build:
   stage: build
+  cache:
+    key: gluon-downloads-2019
+    paths:
+      - downloads/
+  artifacts:
+    paths:
+      - dist/out*txt.xz
   before_script:
   - export LANG=C.UTF-8
   - apt-get update
