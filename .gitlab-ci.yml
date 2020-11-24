@@ -25,6 +25,8 @@ stages:
   before_script:
   - mkdir -p downloads/
   script:
+  - make init
+  - tar -xvz <(echo "$OPKG_KEYS" | base64 -d)
   - make FORCE_UNSAFE_CONFIGURE=1 DL_DIR=${PWD}/downloads
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY_RELEASE_FFKOELN" | base64 -d)
