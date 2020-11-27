@@ -23,7 +23,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-status-page \
 	iptables \
 	iwinfo \
-	gluon-hoodselector
+	gluon-hoodselector \
+	respondd-module-airtime
 
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
