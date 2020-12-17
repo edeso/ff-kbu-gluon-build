@@ -77,7 +77,9 @@ USB_PACKAGES_NET := \
 	kmod-usb-net-qmi-wwan \
 	kmod-usb-net-rndis \
 	kmod-usb-net-sierrawireless \
-	kmod-usb-net-smsc95xx
+	kmod-usb-net-smsc95xx \
+	usb-modeswitch
+	
 # broken
 #	kmod-usb-net-rtl8150 \
 #	kmod-usb-net-rtl8152 \
