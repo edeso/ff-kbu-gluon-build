@@ -75,3 +75,11 @@ ramips-build:
   stage: build
   variables:
     TARGETS: "ramips-mt7621 ramips-mt7621 ramips-mt76x8 ramips-rt305x"
+
+
+lantiq-build:
+  <<: *build_firmware
+  stage: build
+  variables:
+    TARGETS: "lantiq-xrx200 lantiq-xway"
+
