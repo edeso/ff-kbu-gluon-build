@@ -10,7 +10,6 @@ Für opkg (nicht-https) Zugriffe existiert zudem die URL http://files.freifunk-k
 Der Build kann auch per Hand gestartert werden
 
 * `make world` erstellt binaries für alle Hoods
-* `make deploy` fügt die erstellte Firmware in einer Deploy-Struktur zusammen.
 
 ## Branches:
 
@@ -21,3 +20,11 @@ Der Build kann auch per Hand gestartert werden
 
 * Die Knoten erscheinen z.T. nicht auf der Karte map.kbu.freifunk.net. Ein möglicher Hintergrund ist eine Umstellung in respondd (link local multicast -> site local multicast); die Firmware ist zu neu (vgl. https://github.com/freifunk-gluon/gluon/issues/984).
 * Die Ablage https://kbu.freifunk.net/files/ wird nicht mehr befüllt, da yanosz die Zugriffsrechte dafür entzogen worden sind. Die Dateien dort sind daher veraltet und können weder aktualisiert noch gelöscht werden.
+
+## Gitlab-Pipeline Builds
+
+Für einen gitlab-Build müssen zwei Umgebungsvariablen angegeben werden - zum Beispiel:
+
+* `GLUON_RELEASE: "v2020.2.x-ci-auto"`: Versionsnummer des Builds. Ablageort auf dem Fileserver 
+* `GLUON_BRANCH: "v2020.2.x"`: Git-Branch im gluon-Repository (github)
+
