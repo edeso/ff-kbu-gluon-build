@@ -23,7 +23,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-status-page \
 	iptables \
 	iwinfo \
-	gluon-hoodselector
+	gluon-hoodselector \
+	respondd-module-airtime
 
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
@@ -76,7 +77,9 @@ USB_PACKAGES_NET := \
 	kmod-usb-net-qmi-wwan \
 	kmod-usb-net-rndis \
 	kmod-usb-net-sierrawireless \
-	kmod-usb-net-smsc95xx
+	kmod-usb-net-smsc95xx \
+	usb-modeswitch
+	
 # broken
 #	kmod-usb-net-rtl8150 \
 #	kmod-usb-net-rtl8152 \
@@ -145,20 +148,67 @@ GLUON_SITE_PACKAGES += \
 	$(TOOLS_PACKAGES)
 endif
 
-# ar71xx-generic
-GLUON_TLWR842_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_TLWR1043_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_TLWR2543_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_TLWDR4300_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_WNDR3700_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_WRT160NL_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_ARCHERC7_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_GLINET_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_WZRHPG450H_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
-GLUON_WZRHPAG300H_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
+# ar71xx-generic - incl. tethering
+ifeq ($(GLUON_TARGET),ar71xx-generic)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES)
+endif
 
-# mpc85xx-generic
-GLUON_TLWDR4900_SITE_PACKAGES := $(USB_PACKAGES_BASIC) $(TOOLS_PACKAGES) $(USB_PACKAGES_STORAGE)
+ifeq ($(GLUON_TARGET),mpc85xx-generic)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES)
+endif
+
+
+ifeq ($(GLUON_TARGET),ar71xx-nand)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES)
+endif
+
+ifeq ($(GLUON_TARGET),ath79-generic)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES)
+endif
+
+ifeq ($(GLUON_TARGET),ipq40xx-generic)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES)
+endif
+
+ifeq ($(GLUON_TARGET),ipq806x-generic)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES)
+endif
 
 ##	DEFAULT_GLUON_RELEASE
 #		version string to use for images
