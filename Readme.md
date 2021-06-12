@@ -13,7 +13,8 @@ Der Build kann auch per Hand gestartert werden
 
 ## Branches:
 
-* Der Branch `master` baut zur Zeit Gluon v2020.2.x, weekly (bei Updates und wöchtenlich)
+* Der Branch `master` baut zur Zeit Gluon v2021.1.x, weekly (bei Updates und wöchtenlich)
+* Der Branch `2020.2` ist aktuell noch für weeklies eingetaktet.
 * Die Branches `release-2019.1-ibss` und `release-2019.1-11s` bauen Gluon v2019.1.x, d.h. die letzte Version, die prinzipiell noch mit ibss arbeiten kann.
 
 ## Hinweise:
@@ -25,6 +26,5 @@ Der Build kann auch per Hand gestartert werden
 
 Für einen gitlab-Build müssen zwei Umgebungsvariablen angegeben werden - zum Beispiel:
 
-* `GLUON_RELEASE: "v2020.2.x-ci-auto"`: Versionsnummer des Builds. Ablageort auf dem Fileserver 
-* `GLUON_BRANCH: "v2020.2.x"`: Git-Branch im gluon-Repository (github)
-
+* `GLUON_RELEASE: "v2021.1.x-ci-auto"`: Versionsnummer des Builds. Ablageort auf dem Fileserver
+* `GLUON_BRANCH: "v2021.1.x"`: Git-Branch im gluon-Repository (github)

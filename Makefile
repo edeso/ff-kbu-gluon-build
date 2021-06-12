@@ -1,6 +1,6 @@
 # GLUON-RELEASE to use
 ifndef GLUON_RELEASE
-	GLUON_RELEASE:=v2020.2.x
+	GLUON_RELEASE:=v2021.1.x
 endif
 
 ifndef GLUON_BRANCH

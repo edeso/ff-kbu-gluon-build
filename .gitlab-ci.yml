@@ -3,8 +3,8 @@
 image: git.freifunk-koeln.de:5050/ff-koeln/gluon-docker-build/gluon-build
 
 variables:
-  GLUON_RELEASE: "v2020.2.x-ci-auto"
-  GLUON_BRANCH: "v2020.2.x"
+  GLUON_RELEASE: "v2021.1.x-ci-auto"
+  GLUON_BRANCH: "v2021.1.x"
 
 
 
@@ -26,7 +26,7 @@ stages:
   - mkdir -p downloads/
   script:
   - echo GLUON_RELEASE=$GLUON_RELEASE GLUON_BRANCH=$GLUON_BRANCH
-  - make FORCE_UNSAFE_CONFIGURE=1 DL_DIR=${PWD}/downloads 
+  - make FORCE_UNSAFE_CONFIGURE=1 DL_DIR=${PWD}/downloads
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY_RELEASE_FFKOELN" | base64 -d)
   - xz dist/*.txt
@@ -83,4 +83,3 @@ lantiq-build:
   stage: build
   variables:
     TARGETS: "lantiq-xrx200 lantiq-xway"
-
