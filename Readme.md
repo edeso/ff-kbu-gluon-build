@@ -19,7 +19,7 @@ Der Build kann auch per Hand gestartert werden
 
 ## Hinweise:
 
-* Die Knoten erscheinen z.T. nicht auf der Karte map.kbu.freifunk.net. Ein möglicher Hintergrund ist eine Umstellung in respondd (link local multicast -> site local multicast); die Firmware ist zu neu (vgl. https://github.com/freifunk-gluon/gluon/issues/984).
+* Die Knoten erscheinen nicht auf der Karte map.kbu.freifunk.net. Eine Alternative Karte gibt es unter: https://map.freifunk-koeln.de.  Grund dafür ist eine Umstellung in respondd (link local multicast -> site local multicast); die Firmware ist zu neu (vgl. https://github.com/freifunk-gluon/gluon/issues/984).
 * Die Ablage https://kbu.freifunk.net/files/ wird nicht mehr befüllt, da yanosz die Zugriffsrechte dafür entzogen worden sind. Die Dateien dort sind daher veraltet und können weder aktualisiert noch gelöscht werden.
 
 ## Gitlab-Pipeline Builds
